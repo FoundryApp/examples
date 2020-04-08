@@ -1,5 +1,3 @@
-# A path to your project
-rootDir: ./functions
 # An array of glob patterns for files that should be ignored.
 # If the array is changed, the CLI must be restarted for it to take the effect
 ignore:
@@ -10,16 +8,29 @@ ignore:
 
 serviceAcc: exampleServiceAcc.json
 
+firestore:
+  - collection: workspaces
+    getFromProd: 2
+
+  - collection: workspaces
+    getFromProd: ['PogbRXnkhUN3NA8X8KCu']
+
+  - collection: workspaces
+    docs:
+      - id: workspace1
+        data: '{"name":"testing"}'
+      - id: workspace2
+        data: '{"name":"staging"}'
+
+  - collection: usersInfo
+    docs:
+      - id: user1
+        data: '{"tier":"paid"}'
+      - id: user2
+        data: '{"tier":"free"}'
+
 # An array of Firebase functions that should be evaluated by Foundry. All these functions must be exported in your root index.js
 functions:
-  - name:
-    type: firestore
-    trigger: onCreate
-
-  - name:
-    type: firestore
-    trigger: onUpdate
-
-  - name:
-    type: firestore
-    trigger: onDelete
+  - name: hello
+    type: https
+    payload: "{}"

@@ -4,6 +4,7 @@ const admin = require('firebase-admin');
 admin.initializeApp();
 
 const newUserWorkspace = functions.auth.user().onCreate(async (user) => {
+  console.log(user);
   const workspaceRef = await admin.firestore()
     .collection('workspaces')
     .add({ owner: user.uid, name: user.displayName + 'Workspace' });
@@ -12,6 +13,7 @@ const newUserWorkspace = functions.auth.user().onCreate(async (user) => {
 });
 
 const userCleanup = functions.auth.user().onDelete(async (user) => {
+  console.log(user);
   const userWorkspaces = await admin.firestore()
     .collection('workspaces')
     .where('owner', '==', user.uid)

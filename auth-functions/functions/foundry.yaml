@@ -1,9 +1,7 @@
-# A path to your project
-rootDir: .
 # An array of glob patterns for files that should be ignored.
 # If the array is changed, the CLI must be restarted for it to take the effect
 ignore:
-  - "node_modules" # Skip the whole node_modules directory
+  - node_modules # Skip the whole node_modules directory
   - .git # Skip the whole .git directory
   - "**/.*" # Skip all hidden files
   - "**/*~" # Skip vim's temp files
@@ -13,7 +11,7 @@ serviceAcc: exampleServiceAcc.json
 auth:
   - getFromProd: 2
 
-  - getFromProd: ['jcMG7Nw4SScjvfcu7wNHkhF9o1z2', 'YLGCgn6SDWTHZscEV9yTJIkcEFx1']
+  - getFromProd: ['YLGCgn6SDWTHZscEV9yTJIkcEFx1']
 
   - users:
     - id: user1
@@ -43,33 +41,17 @@ firestore:
         data: '{"tier":"free"}'
 
 
-
 # An array of Firebase functions that should be evaluated by Foundry. All these functions must be exported in your root index.js
 functions:
-  # - name: request
-  #   type: https
-    # payload: '{"key":"world"}'
+  - name: newUserWorkspace
+    type: auth
+    trigger: onCreate
+    createUser:
+      getFromProd:
+        id: jcMG7Nw4SScjvfcu7wNHkhF9o1z2
 
-  - name: request
-    type: https
-    payload:
-      user:
-        # getFromProd:
-          id: user1
-
-  - name: call
-    type: httpsCallable
-    payload:
-      user:
-        # getFromProd:
-          id: user1
-
-
-
-
-
-  # - name: call
-  #   type: httpsCallable
-  #   asUser:
-  #     id: user2
-  #   payload: '{"key":"world"}'
+  - name: userCleanup
+    type: auth
+    trigger: onDelete
+    deleteUser:
+      id: user1

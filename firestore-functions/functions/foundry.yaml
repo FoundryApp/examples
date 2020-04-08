@@ -1,0 +1,94 @@
+# An array of glob patterns for files that should be ignored.
+# If the array is changed, the CLI must be restarted for it to take the effect
+ignore:
+  - node_modules # Skip the whole node_modules directory
+  - .git # Skip the whole .git directory
+  - "**/.*" # Skip all hidden files
+  - "**/*~" # Skip vim's temp files
+
+serviceAcc: exampleServiceAcc.json
+
+auth:
+  - getFromProd: 2
+
+  - getFromProd: ['jcMG7Nw4SScjvfcu7wNHkhF9o1z2', 'YLGCgn6SDWTHZscEV9yTJIkcEFx1']
+
+  - users:
+    - id: user1
+      data: '{"email":"configUser1@email.com"}'
+    - id: user2
+      data: '{"email":"configUser2@email.com"}'
+
+firestore:
+  # - collection: workspaces
+  #   getFromProd: 2
+
+  # - collection: workspaces
+  #   getFromProd: ['PogbRXnkhUN3NA8X8KCu']
+
+  - collection: workspaces
+    docs:
+      - id: PogbRXnkhUN3NA8X8KCu
+        data: '{ "owner": "60tPFM58VxaDloEWZre73Ebdi1V2", "name": "Home" }'
+      - id: workspace2
+        data: '{"name":"staging"}'
+
+  - collection: usersInfo
+    docs:
+      - id: user1
+        data: '{"tier":"paid"}'
+      - id: user2
+        data: '{"tier":"free"}'
+
+
+
+
+# An array of Firebase functions that should be evaluated by Foundry. All these functions must be exported in your root index.js
+functions:
+  # - name: notifyInvitedWorkspaceMembers
+  #   type: firestore
+  #   trigger: onCreate
+  #   createDoc:
+  #     getFromProd:
+  #       id: PogbRXnkhUN3NA8X8KCu
+  #       collection: workspaces
+
+
+  - name: notifyAddedWorkspaceMembers
+    type: firestore
+    trigger: onUpdate
+    updateDoc:
+      getFromProd:
+        id: PogbRXnkhUN3NA8X8KCu
+        collection: workspaces
+
+
+  # - name: notifyWorkspaceMembers
+  #   type: firestore
+  #   trigger: onDelete
+  #   deleteDoc:
+  #     id: workspace1
+  #     collection: workspaces
+
+  # - name: notifyInvitedWorkspaceMembers
+  #   type: firestore
+  #   trigger: onCreate
+  #   createDoc:
+  #     id: uu
+  #     collection: workspaces
+  #     data: '{"ket":"key", "ad":"addd"}'
+
+  # - name: notifyAddedWorkspaceMembers
+  #   type: firestore
+  #   trigger: onUpdate
+  #   updateDoc:
+  #     id: uu
+  #     collection: workspaces
+  #     data: '{"home":"hills"}'
+
+  # - name: notifyWorkspaceMembers
+  #   type: firestore
+  #   trigger: onDelete
+  #   deleteDoc:
+  #     id: workspace1
+  #     collection: workspaces

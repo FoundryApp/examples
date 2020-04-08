@@ -23,5 +23,8 @@ auth:
 
 
 
+
 # An array of Firebase functions that should be evaluated by Foundry. All these functions must be exported in your root index.js
-# functions:
+functions:
+  - name: hello
+    type: https
