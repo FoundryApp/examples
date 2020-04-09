@@ -10,27 +10,23 @@ serviceAcc: exampleServiceAcc.json
 
 firestore:
   - collection: workspaces
-    getFromProd: 2
-
-  - collection: workspaces
-    getFromProd: ['PogbRXnkhUN3NA8X8KCu']
-
-  - collection: workspaces
     docs:
-      - id: workspace1
-        data: '{"name":"testing"}'
-      - id: workspace2
-        data: '{"name":"staging"}'
+      - getFromProd: ['Rqpfrbtvm9l4Wz37Ncn3','YcwSlcfmbZ5qkzjMPQBp']
+      - id: workspace-1
+        data: '{"name":"Hobbies", "owner":"user-1"}'
+      - id: workspace-2
+        data: '{"name":"Side Projects", "owner":"user-2", "members":["user-1"]}'
 
-  - collection: usersInfo
+  - collection: userInfos
     docs:
-      - id: user1
-        data: '{"tier":"paid"}'
-      - id: user2
-        data: '{"tier":"free"}'
+      - getFromProd: ['jcMG7Nw4SScjvfcu7wNHkhF9o1z2']
+      - id: user-1
+        data: '{"tier":"paid", "slackName":"EHanzo"}'
+      - id: user-2
+        data: '{"tier":"free", "slackName":"JSmith"}'
 
 # An array of Firebase functions that should be evaluated by Foundry. All these functions must be exported in your root index.js
 functions:
-  - name: hello
+  - name: listCollectionsDocs
     type: https
-    payload: "{}"
+    payload: '{"collections":["workspaces", "userInfos"]}'

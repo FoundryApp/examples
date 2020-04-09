@@ -10,21 +10,15 @@ ignore:
 
 serviceAcc: exampleServiceAcc.json
 
-auth:
-  - getFromProd: 2
-
-  - getFromProd: ['jcMG7Nw4SScjvfcu7wNHkhF9o1z2', 'YLGCgn6SDWTHZscEV9yTJIkcEFx1']
-
-  - users:
-    - id: user1
-      data: '{"email":"configUser1@email.com"}'
-    - id: user2
-      data: '{"email":"configUser2@email.com"}'
-
-
-
+users:
+  - getFromProd: ['jcMG7Nw4SScjvfcu7wNHkhF9o1z2']
+  - id: user-1
+    data: '{"email":"configUser1@email.com"}'
+  - id: user-2
+    data: '{"email":"configUser2@email.com"}'
 
 # An array of Firebase functions that should be evaluated by Foundry. All these functions must be exported in your root index.js
 functions:
-  - name: hello
+  - name: checkUser
     type: https
+    payload: '{"userId":"user1"}'

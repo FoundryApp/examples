@@ -8,87 +8,51 @@ ignore:
 
 serviceAcc: exampleServiceAcc.json
 
-auth:
-  - getFromProd: 2
-
-  - getFromProd: ['jcMG7Nw4SScjvfcu7wNHkhF9o1z2', 'YLGCgn6SDWTHZscEV9yTJIkcEFx1']
-
-  - users:
-    - id: user1
-      data: '{"email":"configUser1@email.com"}'
-    - id: user2
-      data: '{"email":"configUser2@email.com"}'
+users:
+  - getFromProd: ['jcMG7Nw4SScjvfcu7wNHkhF9o1z2']
+  - id: user-1
+    data: '{"email":"configUser1@email.com"}'
+  - id: user-2
+    data: '{"email":"configUser2@email.com"}'
 
 firestore:
-  # - collection: workspaces
-  #   getFromProd: 2
-
-  # - collection: workspaces
-  #   getFromProd: ['PogbRXnkhUN3NA8X8KCu']
-
   - collection: workspaces
     docs:
-      - id: PogbRXnkhUN3NA8X8KCu
-        data: '{ "owner": "60tPFM58VxaDloEWZre73Ebdi1V2", "name": "Home" }'
-      - id: workspace2
-        data: '{"name":"staging"}'
+      - getFromProd: ['Rqpfrbtvm9l4Wz37Ncn3','YcwSlcfmbZ5qkzjMPQBp']
+      - id: workspace-1
+        data: '{"name":"Hobbies", "owner":"user-1"}'
+      - id: workspace-2
+        data: '{"name":"Side Projects", "owner":"user-2", "members":["user-1"]}'
 
-  - collection: usersInfo
+  - collection: userInfos
     docs:
-      - id: user1
-        data: '{"tier":"paid"}'
-      - id: user2
-        data: '{"tier":"free"}'
-
-
-
+      - getFromProd: ['jcMG7Nw4SScjvfcu7wNHkhF9o1z2']
+      - id: user-1
+        data: '{"tier":"paid", "slackName":"EHanzo"}'
+      - id: user-2
+        data: '{"tier":"free", "slackName":"JSmith"}'
 
 # An array of Firebase functions that should be evaluated by Foundry. All these functions must be exported in your root index.js
 functions:
-  # - name: notifyInvitedWorkspaceMembers
-  #   type: firestore
-  #   trigger: onCreate
-  #   createDoc:
-  #     getFromProd:
-  #       id: PogbRXnkhUN3NA8X8KCu
-  #       collection: workspaces
-
-
-  - name: notifyAddedWorkspaceMembers
+  - name: notifyMembersInNewWorkspace
     type: firestore
-    trigger: onUpdate
-    updateDoc:
+    trigger: onCreate
+    createDoc:
       getFromProd:
         id: PogbRXnkhUN3NA8X8KCu
         collection: workspaces
 
+  - name: notifyMembersAddedToWorkspace
+    type: firestore
+    trigger: onUpdate
+    updateDoc:
+      id: workspace-1
+      collection: workspaces
+      data: '{"members":["user-2"]}'
 
-  # - name: notifyWorkspaceMembers
-  #   type: firestore
-  #   trigger: onDelete
-  #   deleteDoc:
-  #     id: workspace1
-  #     collection: workspaces
-
-  # - name: notifyInvitedWorkspaceMembers
-  #   type: firestore
-  #   trigger: onCreate
-  #   createDoc:
-  #     id: uu
-  #     collection: workspaces
-  #     data: '{"ket":"key", "ad":"addd"}'
-
-  # - name: notifyAddedWorkspaceMembers
-  #   type: firestore
-  #   trigger: onUpdate
-  #   updateDoc:
-  #     id: uu
-  #     collection: workspaces
-  #     data: '{"home":"hills"}'
-
-  # - name: notifyWorkspaceMembers
-  #   type: firestore
-  #   trigger: onDelete
-  #   deleteDoc:
-  #     id: workspace1
-  #     collection: workspaces
+  - name: notifyMembersInDeletedWorkspace
+    type: firestore
+    trigger: onDelete
+    deleteDoc:
+      id: workspace-2
+      collection: workspaces

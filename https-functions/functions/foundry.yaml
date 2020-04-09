@@ -1,5 +1,3 @@
-# A path to your project
-rootDir: .
 # An array of glob patterns for files that should be ignored.
 # If the array is changed, the CLI must be restarted for it to take the effect
 ignore:
@@ -10,66 +8,107 @@ ignore:
 
 serviceAcc: exampleServiceAcc.json
 
-auth:
-  - getFromProd: 2
-
-  - getFromProd: ['jcMG7Nw4SScjvfcu7wNHkhF9o1z2', 'YLGCgn6SDWTHZscEV9yTJIkcEFx1']
-
-  - users:
-    - id: user1
-      data: '{"email":"configUser1@email.com"}'
-    - id: user2
-      data: '{"email":"configUser2@email.com"}'
+users:
+  - getFromProd: ['jcMG7Nw4SScjvfcu7wNHkhF9o1z2']
+  - id: user-1
+    data: '{"email":"configUser1@email.com"}'
+  - id: user-2
+    data: '{"email":"configUser2@email.com"}'
 
 firestore:
   - collection: workspaces
-    getFromProd: 2
-
-  - collection: workspaces
-    getFromProd: ['PogbRXnkhUN3NA8X8KCu']
-
-  - collection: workspaces
     docs:
-      - id: workspace1
-        data: '{"name":"testing"}'
-      - id: workspace2
-        data: '{"name":"staging"}'
+      - getFromProd: ['Rqpfrbtvm9l4Wz37Ncn3','YcwSlcfmbZ5qkzjMPQBp']
+      - id: workspace-1
+        data: '{"name":"Hobbies", "owner":"user-1"}'
+      - id: workspace-2
+        data: '{"name":"Side Projects", "owner":"user-2", "members":["user-1"]}'
 
-  - collection: usersInfo
+  - collection: userInfos
     docs:
-      - id: user1
-        data: '{"tier":"paid"}'
-      - id: user2
-        data: '{"tier":"free"}'
-
-
+      - getFromProd: ['jcMG7Nw4SScjvfcu7wNHkhF9o1z2']
+      - id: user-1
+        data: '{"tier":"paid", "slackName":"EHanzo"}'
+      - id: user-2
+        data: '{"tier":"free", "slackName":"JSmith"}'
 
 # An array of Firebase functions that should be evaluated by Foundry. All these functions must be exported in your root index.js
 functions:
-  # - name: request
-  #   type: https
-    # payload: '{"key":"world"}'
+  # Options for invoking https functions (while running Foundry in this folder, try uncommenting the other options)
+  - name: request
+    type: https
+
+  - name: request
+    type: https
+    payload: '{"key":"world"}'
+
+  - name: request
+    type: https
+    payload:
+      doc:
+        id: user1
+        collection: workspaces
+
+  - name: request
+    type: https
+    payload:
+      doc:
+        getFromProd:
+          id: user1
+          collection: workspaces
 
   - name: request
     type: https
     payload:
       user:
-        # getFromProd:
+        id: user1
+
+  - name: request
+    type: https
+    payload:
+      user:
+        getFromProd:
           id: user1
+
+  # Options for invoking httpsCallable functions
+  - name: call
+    type: httpsCallable
+
+  # With httpsCallable functions you can always specify as which user they should be invoked.
+  # We will automatically verify the users existence in the development environment Authentication.
+  - name: call
+    type: httpsCallable
+    asUser:
+      id: user2
+
+  - name: call
+    type: httpsCallable
+    payload: '{"key":"world"}'
+
+  - name: call
+    type: httpsCallable
+    payload:
+      doc:
+        id: user1
+        collection: workspaces
+
+  - name: call
+    type: httpsCallable
+    payload:
+      doc:
+        getFromProd:
+          id: user1
+          collection: workspaces
 
   - name: call
     type: httpsCallable
     payload:
       user:
-        # getFromProd:
+        id: user1
+
+  - name: call
+    type: httpsCallable
+    payload:
+      user:
+        getFromProd:
           id: user1
-
-
-
-
-
-  # - name: call
-  #   type: httpsCallable
-  #   asUser:
-  #     id: user2
-  #   payload: '{"key":"world"}'
