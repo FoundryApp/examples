@@ -1,10 +1,8 @@
-# An array of glob patterns for files that should be ignored.
-# If the array is changed, the CLI must be restarted for it to take the effect
 ignore:
-  - "node_modules" # Skip the whole node_modules directory
-  - .git # Skip the whole .git directory
-  - "**/.*" # Skip all hidden files
-  - "**/*~" # Skip vim's temp files
+  - node_modules
+  - .git
+  - "**/.*"
+  - "**/*~"
 
 serviceAcc: exampleServiceAcc.json
 
@@ -32,83 +30,13 @@ firestore:
       - id: user-2
         data: '{"tier":"free", "slackName":"JSmith"}'
 
-# An array of Firebase functions that should be evaluated by Foundry. All these functions must be exported in your root index.js
 functions:
-  # Options for invoking https functions (while running Foundry in this folder, try uncommenting the other options)
-  - name: request
+  - name: askForWorkspaceInvite
     type: https
+    payload: '{"email":"your@email.com", "workspaceId":"workspace-1"}'
 
-  - name: request
-    type: https
-    payload: '{"key":"world"}'
-
-  - name: request
-    type: https
-    payload:
-      doc:
-        id: user1
-        collection: workspaces
-
-  - name: request
-    type: https
-    payload:
-      doc:
-        getFromProd:
-          id: user1
-          collection: workspaces
-
-  - name: request
-    type: https
-    payload:
-      user:
-        id: user1
-
-  - name: request
-    type: https
-    payload:
-      user:
-        getFromProd:
-          id: user1
-
-  # Options for invoking httpsCallable functions
-  - name: call
-    type: httpsCallable
-
-  # With httpsCallable functions you can always specify as which user they should be invoked.
-  # We will automatically verify the users existence in the development environment Authentication.
-  - name: call
+  - name: changeWorkspaceOwner
     type: httpsCallable
     asUser:
-      id: user2
-
-  - name: call
-    type: httpsCallable
-    payload: '{"key":"world"}'
-
-  - name: call
-    type: httpsCallable
-    payload:
-      doc:
-        id: user1
-        collection: workspaces
-
-  - name: call
-    type: httpsCallable
-    payload:
-      doc:
-        getFromProd:
-          id: user1
-          collection: workspaces
-
-  - name: call
-    type: httpsCallable
-    payload:
-      user:
-        id: user1
-
-  - name: call
-    type: httpsCallable
-    payload:
-      user:
-        getFromProd:
-          id: user1
+      id: user-1
+    payload: '{"workspaceId":"workspace-1", "newOwner":"user-2"}'

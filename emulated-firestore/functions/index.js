@@ -14,18 +14,7 @@ const listCollectionsDocs = functions.https.onRequest(async (req, resp) => {
   } catch (error) {
     console.log(error);
   }
-
-
-
   resp.send();
 });
-
-
-
-
-
-
-
-
 
 exports.listCollectionsDocs = listCollectionsDocs;

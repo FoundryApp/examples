@@ -2,9 +2,7 @@ const functions = require('firebase-functions');
 const admin = require('firebase-admin');
 const { IncomingWebhook } = require('@slack/webhook');
 
-// const url = process.env.SLACK_WEBHOOK_URL;
-
-// const webhook = new IncomingWebhook(url);
+const webhook = new IncomingWebhook(process.env.SLACK_WEBHOOK_URL);
 
 admin.initializeApp();
 
@@ -16,9 +14,9 @@ async function notifyMember(userId, message) {
   const userInfo = userInfoSnapshot.data();
   if (userInfo.slackName) {
     const text = `@${userInfo.slackName}${message}`;
-    // await webhook.send({
-    //   text,
-    // });
+    await webhook.send({
+      text,
+    });
     console.log(`Slack message: ${text}`);
   } else {
     console.log(`User with id ${userId} has no slackName`);

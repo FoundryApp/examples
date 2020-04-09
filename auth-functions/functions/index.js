@@ -7,7 +7,7 @@ const newUserWorkspace = functions.auth.user().onCreate(async (user) => {
   console.log(user.email);
   const workspaceRef = await admin.firestore()
     .collection('workspaces')
-    .add({ owner: user.uid, name: 'workspace' + user.uid });
+    .add({ owner: user.uid, name: 'workspace-' + user.uid });
   const workspace = await workspaceRef.get();
   console.log(workspace.data());
 });
