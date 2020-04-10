@@ -1,9 +1,9 @@
 # Foundry: Example projects
 
-This repository is a set of example projects showing how Foundry can be used with Firebase. The overall theme is an app where you manage users and their workspaces.<br/>
+This repository is a set of example projects showing how [Foundry](https://github.com/foundryapp/foundry-cli) can be used with Firebase. The overall theme is an app where you manage users and their workspaces.<br/>
 Each directory is a separate Firebase Functions project showcasing different Foundry functionality.
 
-How to try [Foundry CLI](https://github.com/FoundryApp/foundry-cli) with examples projects:
+How to try [Foundry](https://github.com/FoundryApp/foundry-cli) with examples projects:
 
 1. Install Foundry CLI by following [instructions](https://github.com/FoundryApp/foundry-cli#download-and-installation)
 2. `git clone https://github.com/FoundryApp/examples.git`
