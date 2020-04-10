@@ -5,9 +5,9 @@ const sgMail = require('@sendgrid/mail');
 admin.initializeApp();
 
 
-if (process.env.SENDGRID_API_KEY) {
-  sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-}
+console.log(process.env.var1);
+console.log(process.env.var2);
+
 
 async function sendEmail(text, to, from) {
   return sgMail.send({
@@ -19,8 +19,14 @@ async function sendEmail(text, to, from) {
 }
 
 
+
+
+
+
 const askForWorkspaceInvite = functions.https.onRequest(async (req, resp) => {
-  if (!process.env.SENDGRID_API_KEY) {
+  if (process.env.SENDGRID_API_KEY) {
+    sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+  } else {
     resp.status(500).send('Could not find SENDGRID_API_KEY env var');
     return;
   }

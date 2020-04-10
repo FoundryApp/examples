@@ -15,6 +15,7 @@ const newUserWorkspace = functions.auth.user().onCreate(async (user) => {
 });
 
 
+
 const userCleanup = functions.auth.user().onDelete(async (user) => {
   await admin
     .firestore()
