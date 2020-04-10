@@ -33,7 +33,7 @@ Showcase of the emulated Firestore database: Fill the emulated Firestore with cu
 
 ## [firestore-functions](https://github.com/FoundryApp/examples/tree/master/firestore-functions)
 
-Showcase of [Firestore trigger](https://firebase.google.com/docs/functions/firestore-events) functions: Functionality around workspaces and Slack notifications. When you create a workspace with a new  members, add members to an existing workspace, or delete a workspace, a relevant Slack notification will be sent.
+Showcase of [Firestore trigger](https://firebase.google.com/docs/functions/firestore-events) functions: Functionality around workspaces and Slack notifications. When you create a workspace with new members, add members to an existing workspace, or delete a workspace, a relevant Slack notification will be sent.
 
 - onCreate function `notifyMembersInNewWorkspace` sends a message to Slack mentioning all members from a newly created workspace
 
@@ -43,7 +43,7 @@ Showcase of [Firestore trigger](https://firebase.google.com/docs/functions/fires
 
 ## [https-functions](https://github.com/FoundryApp/examples/tree/master/https-functions)
 
-Showcase of [HTTPS](https://firebase.google.com/docs/functions/http-events) and [HTTPS Callable](https://firebase.google.com/docs/functions/callable) functions: Custom API endpoints accessible by a HTTPS request or from within a Firebase app using the Firebase Client SDK.
+Showcase of [HTTPS](https://firebase.google.com/docs/functions/http-events) and [HTTPS Callable](https://firebase.google.com/docs/functions/callable) functions: Custom API endpoints accessible by an HTTPS request or from within a Firebase app using the Firebase Client SDK.
 
 - https function `askForWorkspaceInvite` allows anyone to send a REST request asking the owner of a workspace for an invite. The request's body expects 2 fields:
   - `workspaceId` - an ID of a workspace
@@ -51,4 +51,4 @@ Showcase of [HTTPS](https://firebase.google.com/docs/functions/http-events) and 
 
 - httpsCallable function `changeWorkspaceOwner` allows your Firebase app users to change ownership of their workspace. The functions expects 2 parameters:
   - `workspaceId` - an ID of workspace where the ownership change should happen
-  - `newOwner` - an ID of user that will become new owner
+  - `newOwner` - an ID of user that will become a new owner
