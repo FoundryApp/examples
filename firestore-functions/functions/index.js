@@ -2,48 +2,72 @@ const functions = require('firebase-functions');
 const admin = require('firebase-admin');
 const { IncomingWebhook } = require('@slack/webhook');
 
-const webhook = new IncomingWebhook(process.env.SLACK_WEBHOOK_URL);
-
 admin.initializeApp();
 
-async function notifyMember(userId, message) {
-  const userInfoSnapshot = await admin.firestore().collection('userInfos').doc(userId).get();
-  if (!userInfoSnapshot.exists) {
-    console.log(`Could not find member with userId ${userId}`);
+const webhook = new IncomingWebhook(process.env.SLACK_WEBHOOK_URL);
+
+
+async function notifyMembers(userIds, message) {
+  const slackNames = [];
+
+  for (const userId of userIds) {
+    const userInfoSnapshot = await admin
+      .firestore()
+      .collection('userInfos')
+      .doc(userId)
+      .get();
+
+    if (!userInfoSnapshot.exists) {
+      console.log(`Could not find member with userId "${userId}"`);
+      continue;
+    }
+
+    const userInfo = userInfoSnapshot.data();
+    if (userInfo.slackName) {
+      slackNames.push(`@${userInfo.slackName}`);
+    } else {
+      console.log(`User "${userId}" has no slackName`);
+    }
   }
-  const userInfo = userInfoSnapshot.data();
-  if (userInfo.slackName) {
-    const text = `@${userInfo.slackName}${message}`;
+
+  if (slackNames.length > 0) {
+    const text = slackNames.join(', ') + message;
     await webhook.send({
       text,
     });
     console.log(`Slack message: ${text}`);
-  } else {
-    console.log(`User with id ${userId} has no slackName`);
   }
 }
+
 
 const notifyMembersInNewWorkspace = functions
   .firestore
   .document('workspaces/{workspaceId}')
   .onCreate(async (snapshot) => {
     const workspaceData = snapshot.data();
-    const message = ` was added to the new workspace ${workspaceData.name}`;
+
     const members = workspaceData.members || [];
-    const notifyPromises = members.map(async (member) => notifyMember(member, message));
-    return Promise.all(notifyPromises);
+
+    const message = ` added to a new workspace "${workspaceData.name}"`;
+
+    return notifyMembers(members, message);
   });
+
 
 const notifyMembersAddedToWorkspace = functions
   .firestore
   .document('workspaces/{workspaceId}')
   .onUpdate(async (change) => {
-    const beforeMembers = change.before.data().members || [];
-    const afterMembers = change.after.data().members || [];
-    const newMembers = afterMembers.filter((member) => !beforeMembers.includes(member));
-    const message = ` was added to the workspace ${change.after.data().name}`;
-    const notifyPromises = newMembers.map(async (member) => notifyMember(member, message));
-    return Promise.all(notifyPromises);
+    const workspaceBeforeData = change.before.data();
+    const workspaceAfterData = change.after.data();
+
+    const membersBefore = workspaceBeforeData.members || [];
+    const membersAfter = workspaceAfterData.members || [];
+    const newMembers = membersAfter.filter((member) => !membersBefore.includes(member));
+
+    const message = ` added to an existing workspace "${change.after.data().name}"`;
+
+    return notifyMembers(newMembers, message);
   });
 
 const notifyMembersInDeletedWorkspace = functions
@@ -51,10 +75,12 @@ const notifyMembersInDeletedWorkspace = functions
   .document('workspaces/{workspaceId}')
   .onDelete(async (snapshot) => {
     const workspaceData = snapshot.data();
+
     const members = workspaceData.members || [];
-    const message = ` was member in a deleted workspace ${workspaceData.name}`;
-    const notifyPromises = [...members, workspaceData.owner].map((member) => notifyMember(member, message));
-    return Promise.all(notifyPromises);
+
+    const message = ` was/were in a deleted workspace "${workspaceData.name}"`;
+
+    return notifyMembers(members, message);
   });
 
 

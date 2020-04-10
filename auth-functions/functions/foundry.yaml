@@ -7,7 +7,7 @@ ignore:
 serviceAcc: exampleServiceAcc.json
 
 users:
-  - getFromProd: ["jcMG7Nw4SScjvfcu7wNHkhF9o1z2"]
+  - getFromProd: [jcMG7Nw4SScjvfcu7wNHkhF9o1z2]
   - id: user-1
     data: '{"email":"configUser1@email.com"}'
   - id: user-2
@@ -16,7 +16,7 @@ users:
 firestore:
   - collection: workspaces
     docs:
-      - getFromProd: ["Rqpfrbtvm9l4Wz37Ncn3", "YcwSlcfmbZ5qkzjMPQBp"]
+      - getFromProd: [Rqpfrbtvm9l4Wz37Ncn3, YcwSlcfmbZ5qkzjMPQBp]
       - id: workspace-1
         data: '{"name":"Hobbies", "owner":"user-1"}'
       - id: workspace-2
@@ -24,9 +24,9 @@ firestore:
 
   - collection: userInfos
     docs:
-      - getFromProd: ["jcMG7Nw4SScjvfcu7wNHkhF9o1z2"]
+      - getFromProd: [jcMG7Nw4SScjvfcu7wNHkhF9o1z2]
       - id: user-1
-        data: '{"tier":"paid", "slackName":"EHanzo"}'
+        data: '{"tier":"paid", "slackName":"HHanzo"}'
       - id: user-2
         data: '{"tier":"free", "slackName":"JSmith"}'
 
@@ -42,4 +42,4 @@ functions:
     type: auth
     trigger: onDelete
     deleteUser:
-      id: jcMG7Nw4SScjvfcu7wNHkhF9o1z2
+      id: user-1
