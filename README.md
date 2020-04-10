@@ -2,7 +2,7 @@
 
 Here is an example project where we create a simple backend for managing users and their workspaces. In each directory we showcase a specific part of the Foundry functionality.
 
-(go to directory/function and foundry go!)
+TODO: (go to directory/function and foundry go)
 
 ## auth-functions
 
