@@ -3,7 +3,7 @@
 This repository is a set of example projects showing how [Foundry](https://github.com/foundryapp/foundry-cli) can be used with Firebase. The overall theme is an app where you manage users and their workspaces.<br/>
 Each directory is a separate Firebase Functions project showcasing different Foundry functionality.
 
-How to try [Foundry](https://github.com/FoundryApp/foundry-cli) with examples projects:
+How to try [Foundry](https://github.com/FoundryApp/foundry-cli) with example projects:
 
 1. Install Foundry CLI by following [instructions](https://github.com/FoundryApp/foundry-cli#download-and-installation)
 2. `git clone https://github.com/FoundryApp/examples.git`
@@ -13,7 +13,7 @@ How to try [Foundry](https://github.com/FoundryApp/foundry-cli) with examples pr
 
 ## [auth-functions](https://github.com/FoundryApp/examples/tree/master/auth-functions)
 
-Showcas of [auth trigger](https://firebase.google.com/docs/functions/auth-events) functions: Create a default workspace for a new user and delete user's data from Firestore when the user is deleted from Firebase Auth.
+Showcase of [auth trigger](https://firebase.google.com/docs/functions/auth-events) functions: Create a default workspace for a new user and delete the user's data from Firestore when the user is deleted from Firebase Auth.
 
 - onCreate function `newUserWorkspace` creates a workspace in Firestore when a new user signs up
 
@@ -45,8 +45,8 @@ Showcase of [Firestore trigger](https://firebase.google.com/docs/functions/fires
 
 Showcase of [HTTPS](https://firebase.google.com/docs/functions/http-events) and [HTTPS Callable](https://firebase.google.com/docs/functions/callable) functions: Custom API endpoints accessible by a HTTPS request or from within a Firebase app using the Firebase Client SDK.
 
-- https function `askForWorkspaceInvite` allows anyone to send a REST request asking the owner of a workspace for invite. The request's body expects 2 fields:
-  - `workspaceId` - an ID of a workspace 
+- https function `askForWorkspaceInvite` allows anyone to send a REST request asking the owner of a workspace for an invite. The request's body expects 2 fields:
+  - `workspaceId` - an ID of a workspace
   - `email` - an email where the invite will be sent
 
 - httpsCallable function `changeWorkspaceOwner` allows your Firebase app users to change ownership of their workspace. The functions expects 2 parameters:
