@@ -4,8 +4,10 @@ const sgMail = require('@sendgrid/mail');
 
 admin.initializeApp();
 
-sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
+if (process.env.SENDGRID_API_KEY) {
+  sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+}
 
 async function sendEmail(text, to, from) {
   return sgMail.send({
@@ -18,6 +20,11 @@ async function sendEmail(text, to, from) {
 
 
 const askForWorkspaceInvite = functions.https.onRequest(async (req, resp) => {
+  if (!process.env.SENDGRID_API_KEY) {
+    resp.status(500).send('Could not find SENDGRID_API_KEY env var');
+    return;
+  }
+
   if (!req.body.workspaceId) {
     resp.status(400).send('Workspace not specified');
     return;
@@ -50,8 +57,13 @@ const askForWorkspaceInvite = functions.https.onRequest(async (req, resp) => {
       const messageToOwner = `User with email ${req.body.email} asked for invite into your workspace ${workspaceData.name}`;
       const messageToRequester = `Your invitation to the workspace ${workspaceData.name} was sent to ${ownerRecord.email}`;
 
-      await sendEmail(messageToOwner, ownerRecord.email, req.body.email);
-      await sendEmail(messageToRequester, req.body.email, ownerRecord.email);
+      try {
+        await sendEmail(messageToOwner, ownerRecord.email, req.body.email);
+        await sendEmail(messageToRequester, req.body.email, ownerRecord.email);
+      } catch (error) {
+        resp.status(error.code).send(error.response.body);
+        return;
+      }
 
       resp.status(200).json({
         message: 'Request has been sent to the workspace owner',
@@ -83,6 +95,7 @@ const changeWorkspaceOwner = functions.https.onCall(async (data, context) => {
 
   const workspaceData = workspaceSnapshot.data();
 
+  console.log(workspaceData);
   if (userId === workspaceData.owner) {
     try {
       const newOwnerRecord = await admin
@@ -102,7 +115,6 @@ const changeWorkspaceOwner = functions.https.onCall(async (data, context) => {
     throw new functions.https.HttpsError('permission-denied', 'Current user is not the owner of the workspace');
   }
 });
-
 
 exports.changeWorkspaceOwner = changeWorkspaceOwner;
 exports.askForWorkspaceInvite = askForWorkspaceInvite;
