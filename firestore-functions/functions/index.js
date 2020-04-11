@@ -23,6 +23,7 @@ async function notifyMembers(userIds, message) {
     }
 
     const userInfo = userInfoSnapshot.data();
+    console.log(userInfo);
     if (userInfo.slackName) {
       slackNames.push(`@${userInfo.slackName}`);
     } else {
@@ -60,7 +61,6 @@ const notifyMembersAddedToWorkspace = functions
   .onUpdate(async (change) => {
     const workspaceBeforeData = change.before.data();
     const workspaceAfterData = change.after.data();
-
     const membersBefore = workspaceBeforeData.members || [];
     const membersAfter = workspaceAfterData.members || [];
     const newMembers = membersAfter.filter((member) => !membersBefore.includes(member));

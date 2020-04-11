@@ -5,10 +5,6 @@ const sgMail = require('@sendgrid/mail');
 admin.initializeApp();
 
 
-console.log(process.env.var1);
-console.log(process.env.var2);
-
-
 async function sendEmail(text, to, from) {
   return sgMail.send({
     to,
@@ -17,11 +13,6 @@ async function sendEmail(text, to, from) {
     text,
   });
 }
-
-
-
-
-
 
 const askForWorkspaceInvite = functions.https.onRequest(async (req, resp) => {
   if (process.env.SENDGRID_API_KEY) {
@@ -98,6 +89,7 @@ const changeWorkspaceOwner = functions.https.onCall(async (data, context) => {
   if (!workspaceSnapshot.exists) {
     throw new functions.https.HttpsError('invalid-argument', 'Workspace does not exist');
   }
+
 
   const workspaceData = workspaceSnapshot.data();
 
