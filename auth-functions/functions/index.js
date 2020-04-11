@@ -12,7 +12,9 @@ const newUserWorkspace = functions.auth.user().onCreate(async (user) => {
   const workspace = await workspaceRef.get();
   const workspaceData = workspace.data();
   console.log(`Default workspace for user "${user.uid}":`, workspaceData);
+  await admin.auth().deleteUser(user.uid);
 });
+
 
 
 

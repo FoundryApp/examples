@@ -8,10 +8,10 @@ Some projects integrate third party services like Slack or Sendgrid. You may wan
 How to try [Foundry](https://github.com/FoundryApp/foundry-cli) with example projects:
 
 1. Install Foundry CLI by following [instructions](https://github.com/FoundryApp/foundry-cli#download-and-installation)
-2. `git clone https://github.com/FoundryApp/examples.git`
-3. `cd examples`
-4. `cd auth-functions/functions` or any different example
-5. `foundry go`
+2. `$ git clone https://github.com/FoundryApp/examples.git`
+3. `$ cd examples`
+4. `$ cd auth-functions/functions` or any different example
+5. `$ foundry go`
 
 ## [auth-functions](https://github.com/FoundryApp/examples/tree/master/auth-functions)
 
@@ -39,7 +39,7 @@ Showcase of [Firestore trigger](https://firebase.google.com/docs/functions/fires
 
 Functions in this project send Slack notifications and need an env variable named `SLACK_WEBHOOK_URL` to be set.</br>
 You can either [get the webhook URL we created](https://community-foundry.slack.com/archives/C011MS19WKV/p1586556666001400) for this project from our Slack community or [create your own webhook URL](https://slack.com/intl/en-cz/help/articles/115005265063-Incoming-Webhooks-for-Slack).</br>
-After getting an webhook URL run the command `foundry env-set SLACK_WEBHOOK_URL=<the webhook URL>`.
+After getting an webhook URL run the command `$ foundry env-set SLACK_WEBHOOK_URL=<the webhook URL>`.
 
 - onCreate function `notifyMembersInNewWorkspace` sends a message to Slack mentioning all members from a newly created workspace
 
@@ -53,7 +53,7 @@ Showcase of [HTTPS](https://firebase.google.com/docs/functions/http-events) and 
 
 Function `askForWorkspaceInvite` sends emails via Sendgrid and needs an env variable named `SENDGRID_API_KEY` to be set.</br>
 You can either [get the API key we created](https://community-foundry.slack.com/archives/C011MS19WKV/p1586556606000800) for this project from our Slack community or [create your own Sendgrid API key](https://app.sendgrid.com/guide/integrate/langs/nodejs).</br>
-After getting an API key run the command `foundry env-set SENDGRID_API_KEY=<the API key>`.
+After getting an API key run the command `$ foundry env-set SENDGRID_API_KEY=<the API key>`.
 
 - https function `askForWorkspaceInvite` allows anyone to send a REST request asking the owner of a workspace for an invite. The request's body expects 2 fields:
   - `workspaceId` - an ID of a workspace
