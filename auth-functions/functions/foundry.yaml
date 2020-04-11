@@ -41,5 +41,5 @@ functions:
   - name: userCleanup
     type: auth
     trigger: onDelete
-    # deleteUser:
-    #   id: user-1
+    deleteUser:
+      id: user-1
