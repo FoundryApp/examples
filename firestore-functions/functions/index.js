@@ -21,7 +21,7 @@ async function notifyMembers(userIds, message) {
       console.log(`Could not find member with userId "${userId}"`);
       continue;
     }
-
+      
     const userInfo = userInfoSnapshot.data();
     console.log(userInfo);
     if (userInfo.slackName) {

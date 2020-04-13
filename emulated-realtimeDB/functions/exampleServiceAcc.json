@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "foundry-examples",
+  "private_key_id": "371edf990396f87cca5a81a508e5832316cbbedd",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQC9UF5L4o4Y2CuR\n9lFLOW4dgA0F6Nnku2xuBb63NZzDSjo3+Rbfx7ELWe97iLzK7vFvPo2xWduxYu6J\nEA8sePFES9wOtYhz4ItgCuMmo1h6GYlXTayk3VxE0qemVu7neK2ZfjGOmfo/26i9\nsMVxmIpRtX52jUbPOfqSX3ss2hww9hJ/TOtob+YYy1maAoZf9D+Ah+6bAPmX2EVz\n+t6TrjaWMhdbgelqg31Hfjdq1TCWKY1nPafxZFBUxU/iWSaEmGeSQ1eCIQO5h0Vr\nunqrw93Vg6v4G6ZrkGBWov988+OaSiDvLtArca+5BtOJpM6o0Kq3kawfD0+wc45o\n43U53sk7AgMBAAECggEAMwxg4QWOW5Su6wUIlsg9sSa+XEGVv9/qNSDHdI+4XdC+\nMimwyVcHno/5y83rWq1j3SN5AcHBQ+vxdnQmI0/ZfxkVlcHNsbFy48sLxXd2fDY2\nmpwPWcV3A/fpzSjT8wbPiPxGULWkjWOl9MCd/Sus4KuYFk+yMF7p+l5U0JtfzrOV\nPYsisMaiUTzrqHGimiudRv1nLgjD2l8apJYyL8+A7Dc6wNm+GVF7GiWfzPX22grI\nO57uPytLEp3EgofVY4pZ3y24JlUetZiD4BKwjXF9FMElU+eldV2/lsrd0EW6P9h3\n05c2uBBeLTlSUVBFpPZe+0LhBJOZh0JFYt9EwsaHQQKBgQDekfi/KgD1Z/4vRDIx\nP0B/O06OAMuwDM+9XhG/vVR2M6zX8KZDI+WTVjWh88JAqH6VL7j8nyOiP4b8T4EI\nhb257+rGf08BVtXgW2v7urC9uckv/RrKYjTOcHAvvYCix+F47D4AHoNWT5exHs1C\nlnSUI7NcVxbBGAo2XknupKAbHQKBgQDZv6myJ9DScgAV+hGIwmTWmW/fOEhEDQTA\nH2bDMpL9hUkABlEPkznWTfwRi55pumvG3v2hf4sMcoW6IaxP5SFoirXeBNR8YLvr\nXwQznI/JN3OlR6ZyKCNKrWCFasyu877iA2sK7tAgqS4+MVLAucMOjr4ISQFGs9KB\nG5FrNBTuNwKBgHuGvmyyjkeliOCI0+abOVuj+cw8StARvDZYgDdPiBH2SiarDEvV\nH3Rvc2LIG/awzVhVXTDvzeIdqfhc07t8JrmMm1vBioKuxBM6CitzCOaztyJoMjdC\n3BX7N3h3j25Iyy3Gx/5e8Pu1PvZxpvAe+uLBEandN+bBReG44QWO3sFNAoGAPAgP\nLMK1W496XpS2yNFvI4rhwNSvd7NvH9iIaEBFLgfU/GDBcF3SkDany96GKffvRsCr\nhB65oxDftVUbQFuXPk8fnLoQKsowhM+JRQFg0sSq6WI7jTVrpWbvOVkcXQ9uDLmM\nhVMZpid+TD8k5WVRVW4dDgOyil+BJX8INFoDezkCgYBBRXrbJqjmffQuNaQ354Yv\n5VkXWlbe0M7Wxy1OIYgkd7jy2cnTIHxo07fUl13UWh4dopGcBDK9IwJYEEEy2OPw\nA398ANmz3b0ZaGnUQOBvaCcoFpQY+/PvK08XTyIKI+BKECWXuCBcNDNAJT8d37BJ\nuCUOqCyuMRs5NOxbrm9+eQ==\n-----END PRIVATE KEY-----\n",
+  "client_email": "foundry-examples@foundry-examples.iam.gserviceaccount.com",
+  "client_id": "111292907862963213466",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/foundry-examples%40foundry-examples.iam.gserviceaccount.com"
+}

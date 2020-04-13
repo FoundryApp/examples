@@ -1,0 +1,23 @@
+ignore:
+  - node_modules
+  - .git
+  - "**/.*"
+  - "**/*~"
+
+serviceAcc: exampleServiceAcc.json
+
+realtimeDB:
+  # - name: default # non required
+  - ref: 'famous/persons'
+    children:
+      - child: 'alan'
+        data: '{"name":"Hobbies", "owner":"user-1"}'
+      - child: 'steve'
+        data: '{"name":"Side Projects", "owner":"user-2", "members":["user-1"]}'
+
+      # - getFromProd: [Rqpfrbtvm9l4Wz37Ncn3,YcwSlcfmbZ5qkzjMPQBp]
+
+functions:
+  - name: listReferenceChildren
+    type: https
+    payload: '{"collections":["workspaces", "userInfos"]}'
