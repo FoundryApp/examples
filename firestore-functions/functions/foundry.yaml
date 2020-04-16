@@ -58,3 +58,4 @@ functions:
   # - name: logAnyWorkspaceChange
   #   type: firestore
   #   trigger: onWrite
+  

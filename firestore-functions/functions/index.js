@@ -33,9 +33,9 @@ async function notifyMembers(userIds, message) {
 
   if (slackNames.length > 0) {
     const text = slackNames.join(', ') + message;
-    // await webhook.send({
-    //   text,
-    // });
+    await webhook.send({
+      text,
+    });
     console.log(`Slack message: ${text}`);
   }
 }
@@ -70,6 +70,7 @@ const notifyMembersAddedToWorkspace = functions
     return notifyMembers(newMembers, message);
   });
 
+
 const notifyMembersInDeletedWorkspace = functions
   .firestore
   .document('workspaces/{workspaceId}')
@@ -93,6 +94,7 @@ const logAnyWorkspaceChange = functions.firestore.document('workspaces/{workspac
     console.log('Deleted workspace:', change.before.id);
   }
 });
+
 
 exports.notifyMembersInNewWorkspace = notifyMembersInNewWorkspace;
 exports.notifyMembersAddedToWorkspace = notifyMembersAddedToWorkspace;
