@@ -21,7 +21,7 @@ async function notifyMembers(userIds, message) {
       console.log(`Could not find member with userId "${userId}"`);
       continue;
     }
-      
+
     const userInfo = userInfoSnapshot.data();
     console.log(userInfo);
     if (userInfo.slackName) {
@@ -33,9 +33,9 @@ async function notifyMembers(userIds, message) {
 
   if (slackNames.length > 0) {
     const text = slackNames.join(', ') + message;
-    await webhook.send({
-      text,
-    });
+    // await webhook.send({
+    //   text,
+    // });
     console.log(`Slack message: ${text}`);
   }
 }
@@ -84,6 +84,17 @@ const notifyMembersInDeletedWorkspace = functions
   });
 
 
+const logAnyWorkspaceChange = functions.firestore.document('workspaces/{workspaceId}').onWrite(async (change) => {
+  if (change.before.exists && change.after.exists) {
+    console.log('Updated workspace:', change.before.id);
+  } else if (!change.before.exists && change.after.exists) {
+    console.log('Created workspace:', change.after.id);
+  } else if (change.before.exists && !change.after.exists) {
+    console.log('Deleted workspace:', change.before.id);
+  }
+});
+
 exports.notifyMembersInNewWorkspace = notifyMembersInNewWorkspace;
 exports.notifyMembersAddedToWorkspace = notifyMembersAddedToWorkspace;
 exports.notifyMembersInDeletedWorkspace = notifyMembersInDeletedWorkspace;
+exports.logAnyWorkspaceChange = logAnyWorkspaceChange;

@@ -54,3 +54,7 @@ functions:
     deleteDoc:
       id: workspace-2
       collection: workspaces
+
+  # - name: logAnyWorkspaceChange
+  #   type: firestore
+  #   trigger: onWrite
